@@ -16,7 +16,16 @@ app.use(helmet());
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://benyoko71:Bbeennssaa@123@cluster0.wmcuz.mongodb.net/local_library?retryWrites=true&w=majority';
+
+// Set up mongoose connection
+var dev_db_url = 'mongodb+srv://benyoko71:Bbeennssaa@123@cluster0.wmcuz.mongodb.net/local_library?retryWrites=true&w=majority'
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
+//mongodb+srv://locallibraryproduction:bbeennssaa@cluster0.wmcuz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+//heroku config:set MONGODB_URI=mongodb+srv://benyoko71:Bbeennssaa@123@cluster0.wmcuz.mongodb.net/local_library?retryWrites=true&w=majority
+
+//var mongoDB = 'mongodb+srv://benyoko71:Bbeennssaa@123@cluster0.wmcuz.mongodb.net/local_library?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
